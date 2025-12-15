@@ -12,7 +12,11 @@ site_name: Unidad1 TareaRA1 Roberto # Define el título que aparecerá en la bar
 nav:
   # El nombre de la sección en el menú: nombre_archivo.md
   - Home: index.md             # Primer elemento del menú, enlaza con el archivo 'index.md'.
-  - "Elementos python": guia_uso.md           # Segundo elemento del menú, enlaza con el archivo 'guia_uso.md'.
+  - "Elementos de Python": elementos_python.md           # Segundo elemento del menú, enlaza con el archivo 'elementos_python.md'.
+  - "Ejecución y Depuración": depuracion.md           # Segundo elemento del menú, enlaza con el archivo 'depuracion.md'.
+  - "Pruebas ": pruebas.md           # Segundo elemento del menú, enlaza con el archivo 'pruebas.md'.
+  - "Ejecución en Sandbox": sandbox.md           # Segundo elemento del menú, enlaza con el archivo 'sandbox.md'.
+  - "Reflexión": reflexion.md           # Segundo elemento del menú, enlaza con el archivo 'reflexion.md'.
   # Se pueden añadir subsecciones anidando listas:
   # - Referencia: 
   #   - Funciones: referencia/funciones.md
