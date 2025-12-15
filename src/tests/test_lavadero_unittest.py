@@ -31,10 +31,14 @@ class TestLavadero(unittest.TestCase):
     # ----------------------------------------------------------------------
         
     def test1_estado_inicial_correcto(self):
-        """Test 1: Verifica que el estado inicial es Inactivo y con 0 ingresos."""
+        """Premisa 1: Estado inicial del lavadero"""
         self.assertEqual(self.lavadero.fase, Lavadero.FASE_INACTIVO)
         self.assertEqual(self.lavadero.ingresos, 0.0)
         self.assertFalse(self.lavadero.ocupado)
+        self.assertFalse(self.lavadero.prelavado_a_mano)
+        self.assertFalse(self.lavadero.secado_a_mano)
+        self.assertFalse(self.lavadero.encerado)
+
    
     def test2_excepcion_encerado_sin_secado(self):
         """Test 2: Comprueba que encerar sin secado a mano lanza ValueError."""
@@ -42,7 +46,12 @@ class TestLavadero(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.lavadero._hacer_lavado(False, False, True)
 
-    
+    def test3_excepcion_lavado_mientras_ocupado(self):
+        """Premisa 3: No se puede iniciar un lavado si ya hay otro en marcha"""
+        self.lavadero._hacer_lavado(False, False, False)
+        with self.assertRaises(ValueError):
+            self.lavadero._hacer_lavado(False, False, False)
+
     
 
     # ----------------------------------------------------------------------
