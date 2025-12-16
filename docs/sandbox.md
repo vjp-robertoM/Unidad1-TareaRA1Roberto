@@ -21,6 +21,10 @@ sudo apt install firetools -y
 ```bash
 python3 -m venv .venv       # Crear entorno virtual
 source .venv/bin/activate   # Activar entorno virtual
+
+# Instalación de dependencias para lavadero.py
+pip install -r requeriments.txt
+pip install -e .
 ```
 
 ### 1.3 Ejecutar la aplicación en sandbox
