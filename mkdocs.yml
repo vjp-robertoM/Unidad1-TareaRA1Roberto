@@ -12,7 +12,7 @@ site_name: Unidad1 TareaRA1 Roberto # Define el título que aparecerá en la bar
 nav:
   # El nombre de la sección en el menú: nombre_archivo.md
   - Home: index.md             # Primer elemento del menú, enlaza con el archivo 'index.md'.
-  - "Elementos de Python": elementos_python.md           # Segundo elemento del menú, enlaza con el archivo 'elementos_python.md'.
+  - "Elementos de Python": NotebookJupyter-RobertoMartinNieto.ipynb          # Segundo elemento del menú, enlaza con el archivo 'elementos_python.md'.
   - "Ejecución y Depuración": depuracion.md           # Segundo elemento del menú, enlaza con el archivo 'depuracion.md'.
   - "Pruebas ": pruebas.md           # Segundo elemento del menú, enlaza con el archivo 'pruebas.md'.
   - "Ejecución en Sandbox": sandbox.md           # Segundo elemento del menú, enlaza con el archivo 'sandbox.md'.
