@@ -61,5 +61,5 @@ En esta sección se documentan los problemas encontrados durante la depuración 
 
 ## Ejecución de test sin fallos
 
-[Tests correctos](capturas/captura3.png)
+![Tests correctos](capturas/captura3.png)
 
