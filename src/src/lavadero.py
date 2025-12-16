@@ -60,7 +60,7 @@ class Lavadero:
         self.__secado_a_mano = False
         self.__encerado = False
     
-    def hacerLavado(self, prelavado_a_mano, secado_a_mano, encerado):
+    def hacerLavado(self, prelavado_a_mano, secado_a_mano, encerado): 
         """
         Inicia un nuevo ciclo de lavado, validando reglas de negocio.
         
@@ -70,8 +70,10 @@ class Lavadero:
         if self.__ocupado:
             raise RuntimeError("No se puede iniciar un nuevo lavado mientras el lavadero está ocupado")
         
-        if not secado_a_mano and encerado:
-            raise ValueError("No se puede encerar el coche sin secado a mano")
+        if encerado and not secado_a_mano:
+            secado_a_mano = True
+            print("AVISO: Se ha activado secado a mano automáticamente porque se solicitó encerado.")
+
         
         self.__fase = self.FASE_INACTIVO  
         self.__ocupado = True
