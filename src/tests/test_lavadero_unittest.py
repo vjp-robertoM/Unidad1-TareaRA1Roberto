@@ -16,7 +16,7 @@ class TestLavadero(unittest.TestCase):
     # Función para resetear el estado cuanto terminamos una ejecución de lavado
     # ----------------------------------------------------------------------
     def test_reseteo_estado_con_terminar(self):
-        """Test 4: Verifica que terminar() resetea todas las flags y el estado."""
+        """Premisa: Verifica que terminar() resetea todas las flags y el estado."""
         self.lavadero._hacer_lavado(True, True, True)
         self.lavadero._cobrar()
         self.lavadero.terminar()
@@ -52,7 +52,35 @@ class TestLavadero(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.lavadero._hacer_lavado(False, False, False)
 
-    
+    def test4__ingresos_prelavado(self):
+        """Premisa 4: Prelavado a mano = 6,50€"""
+        self.lavadero.__prelavado_a_mano(True, False, False)
+        self.lavadero._cobrar()
+        self.assertEqual(self.lavadero.ingresos, 6.50)
+
+    def test5_ingresos_secado(self):
+        """Premisa 5: Secado a mano = 6,00€"""
+        self.lavadero.hacerLavado(False, True, False)
+        self.lavadero._cobrar()
+        self.assertEqual(self.lavadero.ingresos, 6.00)
+
+    def test6_ingresos_secado_encerado(self):
+        """Premisa 6: Secado + encerado = 7,20€"""
+        self.lavadero._hacer_lavado(False, True, True)
+        self.lavadero._cobrar()
+        self.assertEqual(self.lavadero.ingresos, 7.20)
+
+    def test7_ingresos_prelavado_secado(self):
+        """Premisa 7: Prelavado + secado = 7,50€"""
+        self.lavadero._hacer_lavado(True, True, False)
+        self.lavadero._cobrar()
+        self.assertEqual(self.lavadero.ingresos, 7.50)
+
+    def test8_ingresos_completo(self):
+        """Premisa 8: Prelavado + secado + encerado = 8,70€"""
+        self.lavadero._hacer_lavado(True, True, True)
+        self.lavadero._cobrar()
+        self.assertEqual(self.lavadero.ingresos, 8.70)
 
     # ----------------------------------------------------------------------
     # Tests de flujo de fases
@@ -67,9 +95,38 @@ class TestLavadero(unittest.TestCase):
         fases_obtenidas = self.lavadero.ejecutar_y_obtener_fases(prelavado=False, secado=False, encerado=False)
         
         # Verificar que las fases obtenidas coinciden con las esperadas
-        self.assertEqual(f"Secuencia de fases incorrecta.\nEsperadas: {fases_esperadas}\nObtenidas: {fases_obtenidas}")
-      
+        self.assertEqual(f"Secuencia de fases incorrecta.\nEsperadas: {fases_esperadas}, \nObtenidas: {fases_obtenidas}")
+
+    def test10_flujo_prelavado(self):
+        """Premisa 10: Flujo con prelavado"""
+        fases_esperadas = [0, 1, 2, 3, 4, 5, 6, 0]
+        fases = self.lavadero.ejecutar_y_obtener_fases(True, False, False)
+        self.assertEqual(fases, fases_esperadas)
+
+    def test11_flujo_secado(self):
+        """Premisa 11: Flujo con secado"""
+        fases_esperadas = [0, 1, 3, 4, 5, 7, 0]
+        fases = self.lavadero.ejecutar_y_obtener_fases(False, True, False)
+        self.assertEqual(fases, fases_esperadas)
+
+    def test12_flujo_secado_encerado(self):
+        """Premisa 12: Flujo con secado y encerado"""
+        fases_esperadas = [0, 1, 3, 4, 5, 7, 8, 0]
+        fases = self.lavadero.ejecutar_y_obtener_fases(False, True, True)
+        self.assertEqual(fases, fases_esperadas)
     
+    def test13_flujo_prelavado_secado(self):
+        """Premisa 13: Flujo con prelavado y secado"""
+        fases_esperadas = [0, 1, 2, 3, 4, 5, 7, 0]
+        fases = self.lavadero.ejecutar_y_obtener_fases(True, True, False)
+        self.assertEqual(fases, fases_esperadas)
+
+    def test14_flujo_completo(self):
+        """Premisa 14: Flujo completo"""
+        fases_esperadas = [0, 1, 2, 3, 4, 5, 7, 8, 0]
+        fases = self.lavadero.ejecutar_y_obtener_fases(True, True, True)
+        self.assertEqual(fases, fases_esperadas)
+
  
 # Bloque de ejecución para ejecutar los tests si el archivo es corrido directamente
 if __name__ == '__main__':
